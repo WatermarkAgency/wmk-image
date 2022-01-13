@@ -1,5 +1,4 @@
 import get from "lodash/get";
-// import { NodeImageFields } from "../fragments/nodeImageFields";
 
 export interface GatsbyImageData {
   images: {
