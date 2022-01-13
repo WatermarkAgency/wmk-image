@@ -32,7 +32,7 @@ export declare class Img {
     title: string;
     alt: string;
     src: string | undefined;
-    private gatsby;
+    private gatsbyImageData;
     private crops;
     contentType: string;
     constructor(node: object);
