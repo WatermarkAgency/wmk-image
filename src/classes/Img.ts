@@ -28,7 +28,7 @@ export class Img {
   title: string;
   alt: string;
   src: string | undefined;
-  private gatsby: GatsbyImageData;
+  private gatsbyImageData: GatsbyImageData;
   private crops: { [key: string]: GatsbyImageData };
   contentType: string;
   constructor(node: object) {
@@ -47,7 +47,7 @@ export class Img {
     this.description = get(node, `description`, ``);
     this.alt = get(node, `title`, get(node, `node.altText`, ""));
     this.src = url;
-    this.gatsby = gatsby;
+    this.gatsbyImageData = gatsby;
     this.contentType = get(node, `file.contentType`);
     this.crops = {};
   }
@@ -64,6 +64,6 @@ export class Img {
   }
   get(crop: string = "") {
     const img = this.crop(crop);
-    return crop === "" ? this.gatsby : img; //Object.keys(img).map((k) => img[k])[0];
+    return crop === "" ? this.gatsbyImageData : img; //Object.keys(img).map((k) => img[k])[0];
   }
 }
