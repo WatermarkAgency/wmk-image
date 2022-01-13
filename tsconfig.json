@@ -10,7 +10,10 @@
     "outDir": "./dist",
     "preserveConstEnums": true,
     "target": "es5",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": true
   },
   "exclude": ["node_modules"]
 }
