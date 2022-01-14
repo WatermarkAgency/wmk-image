@@ -1,5 +1,8 @@
 import get from "lodash/get";
 
+const sanitizeContentfulUrl = (_url: string) =>
+  _url.indexOf("//") === 0 ? "https:" + _url : _url;
+
 export interface GatsbyImageData {
   images: {
     sources: { srcSet: string; sizes: string; type: string }[];
@@ -41,7 +44,7 @@ export class Img {
         get(node, `gatsbyImageData.images.fallback.src`, "")
       )
     );
-    const url = _url.indexOf("//") === 0 ? "https:" + _url : _url;
+    const url = sanitizeContentfulUrl(_url);
     this.title = get(node, `title`, get(node, `node.title`));
     this.description = get(node, `description`, ``);
     this.alt = get(node, `title`, get(node, `node.altText`, ""));
@@ -64,5 +67,9 @@ export class Img {
   get(crop: string = "") {
     const img = this.crop(crop);
     return crop === "" ? this.gatsbyImageData : img; //Object.keys(img).map((k) => img[k])[0];
+  }
+  url(crop: string = "") {
+    const img = this.get(crop);
+    return img ? img?.images?.fallback?.src : ``;
   }
 }

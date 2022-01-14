@@ -39,4 +39,5 @@ export declare class Img {
     addCrop(name: string, image: GatsbyImageData, log?: boolean): void;
     private crop;
     get(crop?: string): GatsbyImageData;
+    url(crop?: string): string;
 }
