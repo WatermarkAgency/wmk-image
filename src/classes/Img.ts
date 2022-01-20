@@ -16,6 +16,16 @@ export interface GatsbyImageData {
   layout: "fixed" | "fullWidth" | "constrained";
 }
 
+export interface ContentfulImageQuery {
+  title: string;
+  gatsbyImageData?: GatsbyImageData;
+  file?: {
+    url?: string;
+    contentType?: string;
+  };
+  description?: string;
+}
+
 /**
  * @class
  * Helper class for image queries that will
@@ -33,24 +43,16 @@ export class Img {
   private gatsbyImageData: GatsbyImageData;
   private crops: { [key: string]: GatsbyImageData };
   contentType: string;
-  constructor(node: object) {
-    const gatsby: GatsbyImageData = get(node, `gatsbyImageData`);
-    const _url: string = get(
-      node,
-      `file.url`,
-      get(
-        node,
-        `node.url`,
-        get(node, `gatsbyImageData.images.fallback.src`, "")
-      )
-    );
+  constructor(node: ContentfulImageQuery) {
+    const _node = { ...node };
+    const _url = _node.file.url;
     const url = sanitizeContentfulUrl(_url);
-    this.title = get(node, `title`, get(node, `node.title`));
-    this.description = get(node, `description`, ``);
-    this.alt = get(node, `title`, get(node, `node.altText`, ""));
+    this.title = _node.title;
+    this.description = _node.description;
+    this.alt = _node?.description || _node.title;
     this.src = url;
-    this.gatsbyImageData = gatsby;
-    this.contentType = get(node, `file.contentType`);
+    this.gatsbyImageData = _node.gatsbyImageData;
+    this.contentType = _node.file.contentType;
     this.crops = {};
   }
   addCrop(name: string, image: GatsbyImageData, log = false) {
