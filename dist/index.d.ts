@@ -19,6 +19,15 @@ interface GatsbyImageData {
     height: number;
     layout: "fixed" | "fullWidth" | "constrained";
 }
+interface ContentfulImageQuery {
+    title: string;
+    gatsbyImageData?: GatsbyImageData;
+    file?: {
+        url?: string;
+        contentType?: string;
+    };
+    description?: string;
+}
 /**
  * @class
  * Helper class for image queries that will
@@ -36,7 +45,7 @@ declare class Img {
     private gatsbyImageData;
     private crops;
     contentType: string;
-    constructor(node: object);
+    constructor(node: ContentfulImageQuery);
     addCrop(name: string, image: GatsbyImageData, log?: boolean): void;
     private crop;
     get(crop?: string): GatsbyImageData;
@@ -54,4 +63,4 @@ declare type imageProps = {
 };
 declare const WmkImage: ({ image, className, style, crop, }: imageProps) => JSX.Element;
 
-export { GatsbyImageData, Img, WmkImage };
+export { ContentfulImageQuery, GatsbyImageData, Img, WmkImage };
