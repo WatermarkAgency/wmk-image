@@ -37,13 +37,13 @@ interface ContentfulImageQuery {
 declare class Img {
     /**
      */
-    description: string;
-    title: string;
+    description?: string;
+    title?: string;
     alt: string;
     src?: string;
-    private gatsbyImageData;
+    private gatsbyImageData?;
     private crops;
-    contentType: string;
+    contentType?: string;
     constructor(node: ContentfulImageQuery);
     addCrop(name: string, image: GatsbyImageData, log?: boolean): void;
     private crop;

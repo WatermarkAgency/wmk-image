@@ -35,15 +35,15 @@ export interface ContentfulImageQuery {
 export class Img {
   /**
    */
-  description: string;
-  title: string;
+  description?: string;
+  title?: string;
   alt: string;
   src?: string;
-  private gatsbyImageData: GatsbyImageData;
+  private gatsbyImageData?: GatsbyImageData;
   private crops: { [key: string]: GatsbyImageData };
-  contentType: string;
+  contentType?: string;
   constructor(node: ContentfulImageQuery) {
-    const _node = { ...node };
+    const _node = node ? { ...node } : undefined;
     const _url = _node?.file?.url;
     const url = _url ? sanitizeContentfulUrl(_url) : undefined;
     this.title = _node?.title;
