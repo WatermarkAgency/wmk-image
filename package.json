@@ -1,6 +1,6 @@
 {
   "name": "wmk-image",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "WMK Gatsby Image Utility Component",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

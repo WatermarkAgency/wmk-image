@@ -35,12 +35,11 @@ export interface ContentfulImageQuery {
  */
 export declare class Img {
     /**
-     * @param {Object} node - result of an image node query from Contentful
      */
     description: string;
     title: string;
     alt: string;
-    src: string | undefined;
+    src?: string;
     private gatsbyImageData;
     private crops;
     contentType: string;

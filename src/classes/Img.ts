@@ -34,25 +34,24 @@ export interface ContentfulImageQuery {
  */
 export class Img {
   /**
-   * @param {Object} node - result of an image node query from Contentful
    */
   description: string;
   title: string;
   alt: string;
-  src: string | undefined;
+  src?: string;
   private gatsbyImageData: GatsbyImageData;
   private crops: { [key: string]: GatsbyImageData };
   contentType: string;
   constructor(node: ContentfulImageQuery) {
     const _node = { ...node };
-    const _url = _node.file.url;
-    const url = sanitizeContentfulUrl(_url);
-    this.title = _node.title;
-    this.description = _node.description;
+    const _url = _node?.file?.url;
+    const url = _url ? sanitizeContentfulUrl(_url) : undefined;
+    this.title = _node?.title;
+    this.description = _node?.description;
     this.alt = _node?.description || _node.title;
     this.src = url;
-    this.gatsbyImageData = _node.gatsbyImageData;
-    this.contentType = _node.file.contentType;
+    this.gatsbyImageData = _node?.gatsbyImageData;
+    this.contentType = _node?.file?.contentType;
     this.crops = {};
   }
   addCrop(name: string, image: GatsbyImageData, log = false) {
