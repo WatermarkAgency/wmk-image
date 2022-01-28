@@ -19,7 +19,7 @@ export const WmkImage = ({
   style,
   crop = "",
 }: imageProps) => {
-  const gatsby = image.get(crop);
+  const gatsby = image && image.get(crop);
   const isSvg = !!get(image, `contentType`, get(image, `src`, "")).match(/svg/);
   return isSvg ? (
     <img className={className} style={style} src={image.src} alt={image.alt} />
