@@ -56,10 +56,16 @@ export class Img {
     this.crops = {};
   }
   addCrop(name: string, image: GatsbyImageData, log = false) {
-    const crops = this.crops;
-    crops[name] = image;
-    if (log) {
-      console.log(crops);
+    if (name && name !== "") {
+      const crops = this.crops;
+      crops[name] = image;
+      if (log) {
+        console.log(crops);
+      }
+    } else {
+      console.log(
+        "Problem adding cropped image size. Did you query the data and/or use the correct key?"
+      );
     }
   }
   private crop(name: string) {
