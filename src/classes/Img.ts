@@ -48,7 +48,7 @@ export class Img {
     const url = _url ? sanitizeContentfulUrl(_url) : undefined;
     this.title = _node?.title;
     this.description = _node?.description;
-    this.alt = _node?.description || _node.title;
+    this.alt = _node?.description || _node?.title || "";
     this.src = url;
     this.gatsbyImageData = _node?.gatsbyImageData;
     this.contentType = _node?.file?.contentType;
