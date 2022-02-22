@@ -1,26 +1,29 @@
 import * as React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
-import get from "lodash/get";
 import { Img } from "../classes/Img";
 /**
  * @returns An image element or GatsbyImage depending on image data
  */
 
-type imageProps = {
+export interface WmkImageProps {
   image: Img;
   className?: string;
   style?: object;
   crop?: string;
-};
+}
 
 export const WmkImage = ({
   image,
   className,
   style,
   crop = "",
-}: imageProps) => {
+}: WmkImageProps) => {
   const gatsby = image instanceof Img && "get" in image && image.get(crop);
-  const isSvg = !!get(image, `contentType`, get(image, `src`, "")).match(/svg/);
+  const isSvg = image?.contentType
+    ? !!image.contentType.match(/svg/)
+    : image?.src
+    ? !!image.src.match(/svg/)
+    : false;
   return isSvg ? (
     <img className={className} style={style} src={image.src} alt={image.alt} />
   ) : gatsby ? (
