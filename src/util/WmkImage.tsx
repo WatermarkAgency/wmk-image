@@ -1,6 +1,7 @@
 import * as React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Img } from "../classes/Img";
+import CSS from "csstype";
 /**
  * @returns An image element or GatsbyImage depending on image data
  */
@@ -8,7 +9,7 @@ import { Img } from "../classes/Img";
 export interface WmkImageProps {
   image: Img;
   className?: string;
-  style?: object;
+  style?: CSS.Properties;
   crop?: string;
 }
 
