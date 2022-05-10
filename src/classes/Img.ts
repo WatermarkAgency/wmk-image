@@ -1,5 +1,3 @@
-import get from "lodash/get";
-
 const sanitizeContentfulUrl = (_url: string) =>
   _url.indexOf("//") === 0 ? "https:" + _url : _url;
 
@@ -16,14 +14,26 @@ export interface GatsbyImageData {
   layout: "fixed" | "fullWidth" | "constrained";
 }
 
-export interface ContentfulImageQuery {
-  title: string;
-  gatsbyImageData?: GatsbyImageData;
-  file?: {
-    url?: string;
-    contentType?: string;
-  };
+export interface ContentfulAssetQuery {
+  createdAt?: string;
   description?: string;
+  file: {
+    contentType: string;
+    details?: {
+      image?: {
+        height?: number;
+        width?: number;
+      };
+    };
+    fileName: string;
+    url: string;
+  };
+  title: string;
+  updatedAt?: string;
+}
+
+export interface ContentfulImageQuery extends ContentfulAssetQuery {
+  gatsbyImageData: GatsbyImageData | null;
 }
 
 /**
@@ -68,12 +78,11 @@ export class Img {
     }
   }
   private crop(name: string) {
-    const cropped: GatsbyImageData = get(this, `crops.${name}`);
-    return cropped;
+    return name in this.crops ? this.crops[name] : undefined;
   }
   get(crop: string = "") {
     const img = this.crop(crop);
-    return crop === "" ? this.gatsbyImageData : img; //Object.keys(img).map((k) => img[k])[0];
+    return crop === "" ? this.gatsbyImageData : img;
   }
   url(crop: string = "") {
     const img = this.get(crop);
