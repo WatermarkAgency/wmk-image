@@ -80,6 +80,9 @@ export class Img {
   private crop(name: string) {
     return name in this.crops ? this.crops[name] : undefined;
   }
+  has(crop: string){
+    return crop in this.crops
+  }
   get(crop: string = "") {
     const img = this.crop(crop);
     return crop === "" ? this.gatsbyImageData : img;
